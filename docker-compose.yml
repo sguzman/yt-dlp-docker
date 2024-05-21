@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  newsboat:
+    image: newsboat-arch 
+    container_name: newsboat
+    volumes:
+      - ./data/newsboat/:/root/.newsboat
+    restart: always
+
+volumes:
+  newsboat-config:
+    driver: local
+  newsboat-data:
+    driver: local
+
+# Ensure the following directories are created on the host:
+# ./newsboat-config: To store the Newsboat configuration files
+# ./newsboat-data: To store the Newsboat SQLite database
+
