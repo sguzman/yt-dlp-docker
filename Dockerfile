@@ -37,4 +37,4 @@ COPY scrape_and_store.fish .
 RUN chmod +x scrape_and_store.fish
 
 # Run the script
-CMD ["./scrape_and_store.fish"]
+CMD ["/root/app/scrape_and_store.fish"]

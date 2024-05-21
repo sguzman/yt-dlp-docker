@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   yt-dlp:
-    image: guzmansalv/yt-dlp-docker
+    image: guzmansalv/yt-dlp-arch
     container_name: yt-dlp
     volumes:
       - ./data/yt-dlp/:/root/app
