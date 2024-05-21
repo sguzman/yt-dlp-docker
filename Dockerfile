@@ -5,15 +5,24 @@ FROM archlinux:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update the system and install necessary packages
-RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm \
-    base-devel \
-    git \
-    yt-dlp \
-    sqlite \
-    fish \
+RUN pacman -Syu --noconfirm
+RUN pacman -S --noconfirm --needed git base-devel go fish jq yt-dlp
+
+# Create a non-root user
+RUN useradd -m builduser && echo "builduser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Switch to the non-root user
+USER builduser
+WORKDIR /home/builduser
+
+RUN git clone https://aur.archlinux.org/yay.git
+WORKDIR yay
+RUN makepkg -si --noconfirm
+RUN yay -S --noconfirm \
     zpaq \
-    jq
+
+# Switch back to root user
+USER root
 
 # Create a working directory
 WORKDIR /app
