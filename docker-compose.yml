@@ -1,18 +1,28 @@
 version: '3.8'
 
 services:
-  newsboat:
-    image: newsboat-arch 
-    container_name: newsboat
+  yt-dlp:
+    image: guzmansalv/yt-dlp-docker
+    container_name: yt-dlp
     volumes:
-      - ./data/newsboat/:/root/.newsboat
+      - ./data/yt-dlp/:/root/app
     restart: always
+    depends_on:
+      - yt-dlp-postgres
 
-volumes:
-  newsboat-config:
-    driver: local
-  newsboat-data:
-    driver: local
+  yt-dlp-postgres:
+    image: postgres:latest
+    container_name: yt-dlp-postgres
+    ports:
+      - "5455:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: rss
+    volumes:
+      - ./data/yt-dlp/pgdata/:/var/lib/postgresql/data
+    restart: always
+  
 
 # Ensure the following directories are created on the host:
 # ./newsboat-config: To store the Newsboat configuration files
