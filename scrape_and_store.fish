@@ -9,7 +9,7 @@ while true; do
 
     and cat $msg.json | jq --sort-keys '.' > $msg.pretty.json
     and rm $msg.json
-    and zpaq add json.zpaq $msg.pretty.json -threads 16
+    and zpaq add data/json.zpaq $msg.pretty.json -threads 16
     echo done $msg
     rm $msg.pretty.json
   end

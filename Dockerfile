@@ -28,10 +28,10 @@ USER root
 WORKDIR /root/app
 
 # Copy the urls.txt file to the container
-COPY urls.txt .
+COPY urls.txt /root/app/urls.txt
 
 # Copy the script to the container
-COPY scrape_and_store.fish .
+COPY scrape_and_store.fish /root/app/scrape_and_store.fish
 
 # Make the script executable
 RUN chmod +x scrape_and_store.fish

@@ -5,5 +5,5 @@ services:
     image: guzmansalv/yt-dlp-arch
     container_name: yt-dlp
     volumes:
-      - ./data/yt-dlp/:/root/app
+      - ./data/yt-dlp/:/root/app/data
     restart: always
