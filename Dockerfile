@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Update the system and install necessary packages
 RUN pacman -Syu --noconfirm
-RUN pacman -S --noconfirm --needed git base-devel go fish jq yt-dlp
+RUN pacman -S --noconfirm --needed git base-devel go fish jq yt-dlp perl
 
 # Create a non-root user
 RUN useradd -m builduser && echo "builduser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -18,8 +18,8 @@ WORKDIR /home/builduser
 RUN git clone https://aur.archlinux.org/yay.git
 WORKDIR yay
 RUN makepkg -si --noconfirm
-RUN yay -S --noconfirm \
-    zpaq \
+RUN yay -S --noconfirm pod2man
+RUN yay -S --noconfirm zpaq
 
 # Switch back to root user
 USER root
