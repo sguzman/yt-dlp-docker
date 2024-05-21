@@ -9,21 +9,23 @@ RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm \
     base-devel \
     git \
-    newsboat \
-    sqlite
+    yt-dlp \
+    sqlite \
+    fish \
+    zpaq \
+    jq
 
-# Create a directory for Newsboat configuration and data
-RUN mkdir -p /root/.newsboat /root/.newsboat-data
+# Create a working directory
+WORKDIR /app
 
-# Set the working directory
-WORKDIR /root
+# Copy the urls.txt file to the container
+COPY urls.txt .
 
-# Copy the entrypoint script
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+# Copy the script to the container
+COPY scrape_and_store.fish .
 
-# Make the entrypoint script executable
-RUN chmod +x /usr/local/bin/entrypoint.sh
+# Make the script executable
+RUN chmod +x scrape_and_store.fish
 
-# Set the entrypoint
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
+# Run the script
+CMD ["./scrape_and_store.fish"]
