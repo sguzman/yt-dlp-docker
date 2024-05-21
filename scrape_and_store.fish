@@ -1,4 +1,6 @@
 #!/usr/bin/fish
+#
+set -x fish_trace 1
 
 while true; do
   cat urls.txt | while read msg

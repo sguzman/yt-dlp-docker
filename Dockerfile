@@ -25,7 +25,7 @@ RUN yay -S --noconfirm zpaq
 USER root
 
 # Create a working directory
-WORKDIR /app
+WORKDIR /root/app
 
 # Copy the urls.txt file to the container
 COPY urls.txt .

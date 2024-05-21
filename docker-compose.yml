@@ -7,24 +7,3 @@ services:
     volumes:
       - ./data/yt-dlp/:/root/app
     restart: always
-    depends_on:
-      - yt-dlp-postgres
-
-  yt-dlp-postgres:
-    image: postgres:latest
-    container_name: yt-dlp-postgres
-    ports:
-      - "5455:5432"
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: rss
-    volumes:
-      - ./data/yt-dlp/pgdata/:/var/lib/postgresql/data
-    restart: always
-  
-
-# Ensure the following directories are created on the host:
-# ./newsboat-config: To store the Newsboat configuration files
-# ./newsboat-data: To store the Newsboat SQLite database
-
