@@ -2,8 +2,8 @@
 #
 set -x fish_trace 1
 
-while true; do
-  cat urls.txt | while read msg
+while true
+  cat urls.txt | shuf | while read msg
     echo start $msg
     yt-dlp --verbose -J "https://www.youtube.com/@$msg" > $msg.json;
 
